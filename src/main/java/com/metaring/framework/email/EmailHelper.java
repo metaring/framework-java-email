@@ -19,8 +19,8 @@ package com.metaring.framework.email;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 
-import org.json.JSONObject;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupFile;
@@ -160,9 +160,11 @@ class EmailHelper {
         if (emailTemplateArgumentSeries != null && emailTemplateArgumentSeries.size() > 0) {
             for (EmailTemplateArgument mailTemplateArgument : emailTemplateArgumentSeries) {
                 try {
-                    template.add(mailTemplateArgument.getName(), new JSONObject(mailTemplateArgument.getJsonValue()));
-                }
-                catch (Exception e) {
+                    final DataRepresentation value = mailTemplateArgument.getValue();
+                    String names = new StringJoiner(".").add(mailTemplateArgument.getName()).add(new StringJoiner(",", "{", "}").add(String.join(",", value.getProperties())).toString()).toString();
+                    Object[] values = value.getProperties().stream().map(current -> value.getText(current)).toArray();
+                    template.addAggr(names, values);
+                } catch (Exception e) {
                 }
             }
         }

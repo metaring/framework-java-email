@@ -66,11 +66,6 @@
             <artifactId>json-io</artifactId>
             <version>4.1.6</version>
         </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20180813</version>
-        </dependency>
     </dependencies>
 
     <properties>

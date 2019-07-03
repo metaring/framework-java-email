@@ -9,23 +9,23 @@ public class EmailTemplateArgument implements GeneratedCoreType {
     public static final String FULLY_QUALIFIED_NAME = "com.metaring.framework.email.emailTemplateArgument";
 
     private String name;
-    private String jsonValue;
+    private DataRepresentation value;
 
-    private EmailTemplateArgument(String name, String jsonValue) {
+    private EmailTemplateArgument(String name, DataRepresentation value) {
         this.name = name;
-        this.jsonValue = jsonValue;
+        this.value = value;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public String getJsonValue() {
-        return this.jsonValue;
+    public DataRepresentation getValue() {
+        return this.value;
     }
 
-    public static EmailTemplateArgument create(String name, String jsonValue) {
-        return new EmailTemplateArgument(name, jsonValue);
+    public static EmailTemplateArgument create(String name, DataRepresentation value) {
+        return new EmailTemplateArgument(name, value);
     }
 
     public static EmailTemplateArgument fromJson(String jsonString) {
@@ -53,15 +53,15 @@ public class EmailTemplateArgument implements GeneratedCoreType {
             }
         }
 
-        String jsonValue = null;
-        if(dataRepresentation.hasProperty("jsonValue")) {
+        DataRepresentation value = null;
+        if(dataRepresentation.hasProperty("value")) {
             try {
-                jsonValue = dataRepresentation.getText("jsonValue");
+                value = dataRepresentation.get("value");
             } catch (Exception e) {
             }
         }
 
-        EmailTemplateArgument emailTemplateArgument = create(name, jsonValue);
+        EmailTemplateArgument emailTemplateArgument = create(name, value);
         return emailTemplateArgument;
     }
 
@@ -71,8 +71,8 @@ public class EmailTemplateArgument implements GeneratedCoreType {
             dataRepresentation.add("name", name);
         }
 
-        if (jsonValue != null) {
-            dataRepresentation.add("jsonValue", jsonValue);
+        if (value != null) {
+            dataRepresentation.add("value", value);
         }
 
         return dataRepresentation;
