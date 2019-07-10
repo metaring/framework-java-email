@@ -18,7 +18,7 @@
 
     <groupId>com.metaring</groupId>
     <artifactId>framework-java-email</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.3</version>
 
     <name>MetaRing Framework Java Email</name>
     <description>Module for Email sending management</description>
@@ -42,7 +42,7 @@
     <scm>
         <url>https://github.com/metaring/framework-java-email.git</url>
         <developerConnection>scm:git:git@github.com:metaring/framework-java-email.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v1.0.3</tag>
     </scm>
 
     <dependencies>
