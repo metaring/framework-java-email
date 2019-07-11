@@ -37,7 +37,6 @@ class EmailHelper {
     private static final String CFG_CONTROLLER = "controller";
     private static final String CFG_TEMPLATES_FOLDER = "templatesFolder";
 
-
     private static final String EMAIL_TEMPLATES_MODULE_INFO_CLASS_NAME = "com.metaring.framework.email.EmailTemplatesModuleInfo";
     protected static final String TEMPLATE_TYPE_SUBJECT = "_subject";
     protected static final String TEMPLATE_TYPE_MESSAGE = "_message";
@@ -151,19 +150,21 @@ class EmailHelper {
     }
 
     public static String getFilledByTemplate(STGroup emailTemplateGroup, ST template, EmailTemplateArgumentSeries emailTemplateArgumentSeries) {
-        String filledTemplateAsString = getFilledTemplateAsString(template, emailTemplateArgumentSeries);
-        String filledTemplate = filledTemplateAsString;
-        return filledTemplate;
+        return getFilledTemplateAsString(template, emailTemplateArgumentSeries);
     }
 
     public static String getFilledTemplateAsString(ST template, EmailTemplateArgumentSeries emailTemplateArgumentSeries) {
         if (emailTemplateArgumentSeries != null && emailTemplateArgumentSeries.size() > 0) {
-            for (EmailTemplateArgument mailTemplateArgument : emailTemplateArgumentSeries) {
+            for (EmailTemplateArgument emailTemplateArgument : emailTemplateArgumentSeries) {
                 try {
-                    final DataRepresentation value = mailTemplateArgument.getValue();
-                    String names = new StringJoiner(".").add(mailTemplateArgument.getName()).add(new StringJoiner(",", "{", "}").add(String.join(",", value.getProperties())).toString()).toString();
-                    Object[] values = value.getProperties().stream().map(current -> value.getText(current)).toArray();
-                    template.addAggr(names, values);
+                    final DataRepresentation value = emailTemplateArgument.getValue();
+                    if(value.hasProperties()) {
+                        String names = new StringJoiner(".").add(emailTemplateArgument.getName()).add(new StringJoiner(",", "{", "}").add(String.join(",", value.getProperties())).toString()).toString();
+                        Object[] values = value.getProperties().stream().map(value::getText).toArray();
+                        template.addAggr(names, values);
+                    } else {
+                        template.add(emailTemplateArgument.getName(), value.asText());
+                    }
                 } catch (Exception e) {
                 }
             }
