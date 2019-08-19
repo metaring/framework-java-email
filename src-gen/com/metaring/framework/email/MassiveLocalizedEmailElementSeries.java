@@ -167,6 +167,19 @@ public class MassiveLocalizedEmailElementSeries extends ArrayList<MassiveLocaliz
         return new MassiveLocalizedEmailElementSeries(list);
     }
 
+    public static MassiveLocalizedEmailElementSeries fromObject(Object object) {
+        if (object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+        List<MassiveLocalizedEmailElement> list = new ArrayList<>();
+        for(DataRepresentation data : dataRepresentation) {
+            list.add(MassiveLocalizedEmailElement.fromJson(data.asText()));
+        }
+        return new MassiveLocalizedEmailElementSeries(list);
+    }
+
     public DataRepresentation toDataRepresentation() {
         return Tools.FACTORY_DATA_REPRESENTATION.fromJson(toJson());
     }

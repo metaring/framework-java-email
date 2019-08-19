@@ -80,6 +80,42 @@ public class EmailContentFromTemplate implements GeneratedCoreType {
         return emailContentFromTemplate;
     }
 
+    public static EmailContentFromTemplate fromObject(Object object) {
+
+        if(object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+
+        String subject = null;
+        if(dataRepresentation.hasProperty("subject")) {
+            try {
+                subject = dataRepresentation.getText("subject");
+            } catch (Exception e) {
+            }
+        }
+
+        String message = null;
+        if(dataRepresentation.hasProperty("message")) {
+            try {
+                message = dataRepresentation.getText("message");
+            } catch (Exception e) {
+            }
+        }
+
+        LocaleEnumerator language = null;
+        if(dataRepresentation.hasProperty("language")) {
+            try {
+                language = dataRepresentation.get("language", LocaleEnumerator.class);
+            } catch (Exception e) {
+            }
+        }
+
+        EmailContentFromTemplate emailContentFromTemplate = create(subject, message, language);
+        return emailContentFromTemplate;
+    }
+
     public DataRepresentation toDataRepresentation() {
         DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.create();
         if (subject != null) {

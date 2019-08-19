@@ -1,14 +1,18 @@
 package com.metaring.framework.email;
 
-import com.metaring.framework.SysKB;
 import java.util.concurrent.CompletableFuture;
 import com.metaring.framework.functionality.AbstractFunctionality;
 import com.metaring.framework.functionality.GeneratedFunctionality;
+import com.metaring.framework.functionality.FunctionalityInfo;
 
-public abstract class ReinitFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
+abstract class ReinitFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
 
-    protected ReinitFunctionality(SysKB sysKB) {
-        super(sysKB, EmailFunctionalitiesManager.REINIT, null);
+    static final FunctionalityInfo INFO = FunctionalityInfo.create("com.metaring.framework.email.reinit", true, false, false, null, null);
+
+    static final ReinitFunctionality INSTANCE = new ReinitFunctionalityImpl();
+
+    protected ReinitFunctionality() {
+        super(INFO, null);
     }
 
     @Override
@@ -104,9 +108,5 @@ public abstract class ReinitFunctionality extends AbstractFunctionality implemen
 
     protected CompletableFuture<Void> afterPostConditionCheck() throws Exception {
         return end;
-    }
-
-    protected static final ReinitFunctionality create(SysKB sysKB) {
-        return new ReinitFunctionalityImpl(sysKB);
     }
 }

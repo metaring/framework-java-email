@@ -138,6 +138,74 @@ public class EmailMessage implements GeneratedCoreType {
         return emailMessage;
     }
 
+    public static EmailMessage fromObject(Object object) {
+
+        if(object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+
+        EmailContact from = null;
+        if(dataRepresentation.hasProperty("from")) {
+            try {
+                from = dataRepresentation.get("from", EmailContact.class);
+            } catch (Exception e) {
+            }
+        }
+
+        EmailContactSeries tos = null;
+        if(dataRepresentation.hasProperty("tos")) {
+            try {
+                tos = dataRepresentation.get("tos", EmailContactSeries.class);
+            } catch (Exception e) {
+            }
+        }
+
+        EmailContactSeries ccs = null;
+        if(dataRepresentation.hasProperty("ccs")) {
+            try {
+                ccs = dataRepresentation.get("ccs", EmailContactSeries.class);
+            } catch (Exception e) {
+            }
+        }
+
+        EmailContactSeries bccs = null;
+        if(dataRepresentation.hasProperty("bccs")) {
+            try {
+                bccs = dataRepresentation.get("bccs", EmailContactSeries.class);
+            } catch (Exception e) {
+            }
+        }
+
+        String subject = null;
+        if(dataRepresentation.hasProperty("subject")) {
+            try {
+                subject = dataRepresentation.getText("subject");
+            } catch (Exception e) {
+            }
+        }
+
+        EmailTypeEnumerator type = null;
+        if(dataRepresentation.hasProperty("type")) {
+            try {
+                type = dataRepresentation.get("type", EmailTypeEnumerator.class);
+            } catch (Exception e) {
+            }
+        }
+
+        String message = null;
+        if(dataRepresentation.hasProperty("message")) {
+            try {
+                message = dataRepresentation.getText("message");
+            } catch (Exception e) {
+            }
+        }
+
+        EmailMessage emailMessage = create(from, tos, ccs, bccs, subject, type, message);
+        return emailMessage;
+    }
+
     public DataRepresentation toDataRepresentation() {
         DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.create();
         if (from != null) {

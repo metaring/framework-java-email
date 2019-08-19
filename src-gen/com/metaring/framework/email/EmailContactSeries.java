@@ -167,6 +167,19 @@ public class EmailContactSeries extends ArrayList<EmailContact> implements Gener
         return new EmailContactSeries(list);
     }
 
+    public static EmailContactSeries fromObject(Object object) {
+        if (object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+        List<EmailContact> list = new ArrayList<>();
+        for(DataRepresentation data : dataRepresentation) {
+            list.add(EmailContact.fromJson(data.asText()));
+        }
+        return new EmailContactSeries(list);
+    }
+
     public DataRepresentation toDataRepresentation() {
         return Tools.FACTORY_DATA_REPRESENTATION.fromJson(toJson());
     }

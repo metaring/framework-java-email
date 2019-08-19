@@ -81,6 +81,42 @@ public class SingleEmailTemplate implements GeneratedCoreType {
         return singleEmailTemplate;
     }
 
+    public static SingleEmailTemplate fromObject(Object object) {
+
+        if(object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+
+        String templateName = null;
+        if(dataRepresentation.hasProperty("templateName")) {
+            try {
+                templateName = dataRepresentation.getText("templateName");
+            } catch (Exception e) {
+            }
+        }
+
+        LocaleEnumerator language = null;
+        if(dataRepresentation.hasProperty("language")) {
+            try {
+                language = dataRepresentation.get("language", LocaleEnumerator.class);
+            } catch (Exception e) {
+            }
+        }
+
+        EmailTemplateArgumentSeries arguments = null;
+        if(dataRepresentation.hasProperty("arguments")) {
+            try {
+                arguments = dataRepresentation.get("arguments", EmailTemplateArgumentSeries.class);
+            } catch (Exception e) {
+            }
+        }
+
+        SingleEmailTemplate singleEmailTemplate = create(templateName, language, arguments);
+        return singleEmailTemplate;
+    }
+
     public DataRepresentation toDataRepresentation() {
         DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.create();
         if (templateName != null) {

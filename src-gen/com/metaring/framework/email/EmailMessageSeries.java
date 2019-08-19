@@ -167,6 +167,19 @@ public class EmailMessageSeries extends ArrayList<EmailMessage> implements Gener
         return new EmailMessageSeries(list);
     }
 
+    public static EmailMessageSeries fromObject(Object object) {
+        if (object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+        List<EmailMessage> list = new ArrayList<>();
+        for(DataRepresentation data : dataRepresentation) {
+            list.add(EmailMessage.fromJson(data.asText()));
+        }
+        return new EmailMessageSeries(list);
+    }
+
     public DataRepresentation toDataRepresentation() {
         return Tools.FACTORY_DATA_REPRESENTATION.fromJson(toJson());
     }

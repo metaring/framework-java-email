@@ -1,15 +1,19 @@
 package com.metaring.framework.email;
 
-import com.metaring.framework.SysKB;
 import java.util.concurrent.CompletableFuture;
 import com.metaring.framework.functionality.AbstractFunctionality;
 import com.metaring.framework.functionality.GeneratedFunctionality;
+import com.metaring.framework.functionality.FunctionalityInfo;
 import com.metaring.framework.email.MassiveTemplateEmail;
 
-public abstract class SendMassiveTemplateEmailFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
+abstract class SendMassiveTemplateEmailFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
 
-    protected SendMassiveTemplateEmailFunctionality(SysKB sysKB) {
-        super(sysKB, EmailFunctionalitiesManager.SEND_MASSIVE_TEMPLATE_EMAIL, null);
+    static final FunctionalityInfo INFO = FunctionalityInfo.create("com.metaring.framework.email.sendMassiveTemplateEmail", true, false, false, "com.metaring.framework.email.MassiveTemplateEmail", null);
+
+    static final SendMassiveTemplateEmailFunctionality INSTANCE = new SendMassiveTemplateEmailFunctionalityImpl();
+
+    protected SendMassiveTemplateEmailFunctionality() {
+        super(INFO, null);
     }
 
     @Override
@@ -110,9 +114,5 @@ public abstract class SendMassiveTemplateEmailFunctionality extends AbstractFunc
     @Override
     protected final Object getInputFromJsonWork(String inputJson) {
         return MassiveTemplateEmail.fromJson(inputJson);
-    }
-
-    protected static final SendMassiveTemplateEmailFunctionality create(SysKB sysKB) {
-        return new SendMassiveTemplateEmailFunctionalityImpl(sysKB);
     }
 }

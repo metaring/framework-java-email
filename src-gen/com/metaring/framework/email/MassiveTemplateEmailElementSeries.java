@@ -167,6 +167,19 @@ public class MassiveTemplateEmailElementSeries extends ArrayList<MassiveTemplate
         return new MassiveTemplateEmailElementSeries(list);
     }
 
+    public static MassiveTemplateEmailElementSeries fromObject(Object object) {
+        if (object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+        List<MassiveTemplateEmailElement> list = new ArrayList<>();
+        for(DataRepresentation data : dataRepresentation) {
+            list.add(MassiveTemplateEmailElement.fromJson(data.asText()));
+        }
+        return new MassiveTemplateEmailElementSeries(list);
+    }
+
     public DataRepresentation toDataRepresentation() {
         return Tools.FACTORY_DATA_REPRESENTATION.fromJson(toJson());
     }

@@ -65,6 +65,34 @@ public class EmailTemplateArgument implements GeneratedCoreType {
         return emailTemplateArgument;
     }
 
+    public static EmailTemplateArgument fromObject(Object object) {
+
+        if(object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+
+        String name = null;
+        if(dataRepresentation.hasProperty("name")) {
+            try {
+                name = dataRepresentation.getText("name");
+            } catch (Exception e) {
+            }
+        }
+
+        DataRepresentation value = null;
+        if(dataRepresentation.hasProperty("value")) {
+            try {
+                value = dataRepresentation.get("value");
+            } catch (Exception e) {
+            }
+        }
+
+        EmailTemplateArgument emailTemplateArgument = create(name, value);
+        return emailTemplateArgument;
+    }
+
     public DataRepresentation toDataRepresentation() {
         DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.create();
         if (name != null) {

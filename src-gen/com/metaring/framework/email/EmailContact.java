@@ -80,6 +80,42 @@ public class EmailContact implements GeneratedCoreType {
         return emailContact;
     }
 
+    public static EmailContact fromObject(Object object) {
+
+        if(object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+
+        String name = null;
+        if(dataRepresentation.hasProperty("name")) {
+            try {
+                name = dataRepresentation.getText("name");
+            } catch (Exception e) {
+            }
+        }
+
+        String surname = null;
+        if(dataRepresentation.hasProperty("surname")) {
+            try {
+                surname = dataRepresentation.getText("surname");
+            } catch (Exception e) {
+            }
+        }
+
+        Email mail = null;
+        if(dataRepresentation.hasProperty("mail")) {
+            try {
+                mail = dataRepresentation.getEmail("mail");
+            } catch (Exception e) {
+            }
+        }
+
+        EmailContact emailContact = create(name, surname, mail);
+        return emailContact;
+    }
+
     public DataRepresentation toDataRepresentation() {
         DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.create();
         if (name != null) {

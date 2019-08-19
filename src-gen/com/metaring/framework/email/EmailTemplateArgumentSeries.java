@@ -167,6 +167,19 @@ public class EmailTemplateArgumentSeries extends ArrayList<EmailTemplateArgument
         return new EmailTemplateArgumentSeries(list);
     }
 
+    public static EmailTemplateArgumentSeries fromObject(Object object) {
+        if (object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+        List<EmailTemplateArgument> list = new ArrayList<>();
+        for(DataRepresentation data : dataRepresentation) {
+            list.add(EmailTemplateArgument.fromJson(data.asText()));
+        }
+        return new EmailTemplateArgumentSeries(list);
+    }
+
     public DataRepresentation toDataRepresentation() {
         return Tools.FACTORY_DATA_REPRESENTATION.fromJson(toJson());
     }

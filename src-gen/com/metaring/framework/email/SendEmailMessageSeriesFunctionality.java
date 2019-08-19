@@ -1,15 +1,19 @@
 package com.metaring.framework.email;
 
-import com.metaring.framework.SysKB;
 import java.util.concurrent.CompletableFuture;
 import com.metaring.framework.functionality.AbstractFunctionality;
 import com.metaring.framework.functionality.GeneratedFunctionality;
+import com.metaring.framework.functionality.FunctionalityInfo;
 import com.metaring.framework.email.EmailMessageSeries;
 
-public abstract class SendEmailMessageSeriesFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
+abstract class SendEmailMessageSeriesFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
 
-    protected SendEmailMessageSeriesFunctionality(SysKB sysKB) {
-        super(sysKB, EmailFunctionalitiesManager.SEND_EMAIL_MESSAGE_SERIES, null);
+    static final FunctionalityInfo INFO = FunctionalityInfo.create("com.metaring.framework.email.sendEmailMessageSeries", true, false, false, "com.metaring.framework.email.EmailMessageSeries", null);
+
+    static final SendEmailMessageSeriesFunctionality INSTANCE = new SendEmailMessageSeriesFunctionalityImpl();
+
+    protected SendEmailMessageSeriesFunctionality() {
+        super(INFO, null);
     }
 
     @Override
@@ -110,9 +114,5 @@ public abstract class SendEmailMessageSeriesFunctionality extends AbstractFuncti
     @Override
     protected final Object getInputFromJsonWork(String inputJson) {
         return EmailMessageSeries.fromJson(inputJson);
-    }
-
-    protected static final SendEmailMessageSeriesFunctionality create(SysKB sysKB) {
-        return new SendEmailMessageSeriesFunctionalityImpl(sysKB);
     }
 }

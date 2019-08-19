@@ -66,6 +66,34 @@ public class MassiveLocalizedEmailElement implements GeneratedCoreType {
         return massiveLocalizedEmailElement;
     }
 
+    public static MassiveLocalizedEmailElement fromObject(Object object) {
+
+        if(object == null) {
+            return null;
+        }
+
+        DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.fromObject(object);
+
+        String templateName = null;
+        if(dataRepresentation.hasProperty("templateName")) {
+            try {
+                templateName = dataRepresentation.getText("templateName");
+            } catch (Exception e) {
+            }
+        }
+
+        MassiveEmailElementSeries recipients = null;
+        if(dataRepresentation.hasProperty("recipients")) {
+            try {
+                recipients = dataRepresentation.get("recipients", MassiveEmailElementSeries.class);
+            } catch (Exception e) {
+            }
+        }
+
+        MassiveLocalizedEmailElement massiveLocalizedEmailElement = create(templateName, recipients);
+        return massiveLocalizedEmailElement;
+    }
+
     public DataRepresentation toDataRepresentation() {
         DataRepresentation dataRepresentation = Tools.FACTORY_DATA_REPRESENTATION.create();
         if (templateName != null) {

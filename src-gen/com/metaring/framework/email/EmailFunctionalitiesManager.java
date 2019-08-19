@@ -13,17 +13,17 @@ import com.metaring.framework.email.SingleEmail;
 
 public class EmailFunctionalitiesManager extends FunctionalitiesManager implements GeneratedFunctionalitiesManager {
 
-    public static final FunctionalityInfo REINIT = FunctionalityInfo.create("com.metaring.framework.email.reinit", true, false, false, null, null);
+    public static final FunctionalityInfo REINIT = ReinitFunctionality.INFO;
 
-    public static final FunctionalityInfo SEND_EMAIL_MESSAGE = FunctionalityInfo.create("com.metaring.framework.email.sendEmailMessage", true, false, false, "com.metaring.framework.email.EmailMessage", null);
+    public static final FunctionalityInfo SEND_EMAIL_MESSAGE = SendEmailMessageFunctionality.INFO;
 
-    public static final FunctionalityInfo SEND_EMAIL_MESSAGE_SERIES = FunctionalityInfo.create("com.metaring.framework.email.sendEmailMessageSeries", true, false, false, "com.metaring.framework.email.EmailMessageSeries", null);
+    public static final FunctionalityInfo SEND_EMAIL_MESSAGE_SERIES = SendEmailMessageSeriesFunctionality.INFO;
 
-    public static final FunctionalityInfo SEND_MASSIVE_LOCALIZED_EMAIL = FunctionalityInfo.create("com.metaring.framework.email.sendMassiveLocalizedEmail", true, false, false, "com.metaring.framework.email.MassiveLocalizedEmail", null);
+    public static final FunctionalityInfo SEND_MASSIVE_LOCALIZED_EMAIL = SendMassiveLocalizedEmailFunctionality.INFO;
 
-    public static final FunctionalityInfo SEND_MASSIVE_TEMPLATE_EMAIL = FunctionalityInfo.create("com.metaring.framework.email.sendMassiveTemplateEmail", true, false, false, "com.metaring.framework.email.MassiveTemplateEmail", null);
+    public static final FunctionalityInfo SEND_MASSIVE_TEMPLATE_EMAIL = SendMassiveTemplateEmailFunctionality.INFO;
 
-    public static final FunctionalityInfo SEND_SINGLE_EMAIL = FunctionalityInfo.create("com.metaring.framework.email.sendSingleEmail", true, false, false, "com.metaring.framework.email.SingleEmail", null);
+    public static final FunctionalityInfo SEND_SINGLE_EMAIL = SendSingleEmailFunctionality.INFO;
 
     public static final CompletableFuture<Void> reinit() {
         return call(REINIT, ReinitFunctionality.class, getCallingFunctionality(), null, null);
