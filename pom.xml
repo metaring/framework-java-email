@@ -18,7 +18,7 @@
 
     <groupId>com.metaring</groupId>
     <artifactId>framework-java-email</artifactId>
-    <version>1.3.2-SNAPSHOT</version>
+    <version>1.5.1-SNAPSHOT</version>
 
     <name>MetaRing Framework Java Email</name>
     <description>Module for Email sending management</description>
@@ -49,7 +49,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>framework-java-localization</artifactId>
-            <version>1.3.2</version>
+            <version>1.5.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
